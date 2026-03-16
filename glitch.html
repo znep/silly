@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</title>
+<style>
+  /* Attempt to load fonts installed by install-fonts.sh.
+     If the fonts from asplo.de/u/IhpZrq.xz are installed under ~/.local/share/fonts/silly-glitch,
+     fc-cache will register them and local() will pick them up by family name.
+     Update GLITCH_FONT below once you know the font family name:
+       fc-list | grep silly-glitch
+  */
+  @font-face {
+    font-family: 'GlitchFont';
+    src: local('GlitchFont'),
+         local('Glitch'),
+         local('VCR OSD Mono'),
+         local('Share Tech Mono'),
+         local('Courier New');
+  }
+
+  :root {
+    --c1: #0ff;
+    --c2: #f0f;
+    --bg: #000;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'GlitchFont', 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  /* ── scanlines overlay ─────────────────────────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,0,0,.35) 2px,
+      rgba(0,0,0,.35) 4px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── glitch heading ────────────────────────────────────────────── */
+  .glitch {
+    position: relative;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.1;
+    text-align: center;
+    animation: body-shake 4s infinite;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    overflow: hidden;
+    clip-path: inset(0 0 100% 0);
+  }
+
+  /* cyan channel – shifted left */
+  .glitch::before {
+    color: var(--c1);
+    left: -3px;
+    text-shadow: 3px 0 var(--c1);
+    animation: glitch-top 3s infinite steps(1);
+  }
+
+  /* magenta channel – shifted right */
+  .glitch::after {
+    color: var(--c2);
+    left: 3px;
+    text-shadow: -3px 0 var(--c2);
+    animation: glitch-bot 3.7s infinite steps(1);
+  }
+
+  @keyframes glitch-top {
+    0%   { clip-path: inset(0% 0 90% 0); transform: translate(-4px,  2px); }
+    5%   { clip-path: inset(15% 0 70% 0); transform: translate( 3px, -1px); }
+    10%  { clip-path: inset(40% 0 45% 0); transform: translate(-2px,  4px); }
+    15%  { clip-path: inset(60% 0 20% 0); transform: translate( 5px, -3px); }
+    20%  { clip-path: inset(80% 0  5% 0); transform: translate(-1px,  1px); }
+    25%  { clip-path: inset( 5% 0 80% 0); transform: translate( 4px,  2px); }
+    30%  { clip-path: inset(25% 0 60% 0); transform: translate(-3px, -2px); }
+    35%  { clip-path: inset(55% 0 30% 0); transform: translate( 2px,  3px); }
+    40%  { clip-path: inset(70% 0 10% 0); transform: translate(-5px,  1px); }
+    45%  { clip-path: inset(10% 0 75% 0); transform: translate( 1px, -4px); }
+    50%  { clip-path: inset(50% 0 35% 0); transform: translate(-2px,  2px); }
+    55%  { clip-path: inset(85% 0  0% 0); transform: translate( 3px, -1px); }
+    60%  { clip-path: inset(30% 0 55% 0); transform: translate(-4px,  3px); }
+    65%  { clip-path: inset( 0% 0 95% 0); transform: translate( 2px, -2px); }
+    70%  { clip-path: inset(45% 0 40% 0); transform: translate(-1px,  4px); }
+    75%  { clip-path: inset(65% 0 15% 0); transform: translate( 4px, -3px); }
+    80%  { clip-path: inset(20% 0 65% 0); transform: translate(-3px,  1px); }
+    85%  { clip-path: inset(90% 0  0% 0); transform: translate( 1px,  2px); }
+    90%  { clip-path: inset(35% 0 50% 0); transform: translate(-2px, -1px); }
+    95%  { clip-path: inset(75% 0  8% 0); transform: translate( 3px,  3px); }
+    100% { clip-path: inset( 5% 0 88% 0); transform: translate(-1px, -2px); }
+  }
+
+  @keyframes glitch-bot {
+    0%   { clip-path: inset(88% 0  0% 0); transform: translate( 3px,  1px); }
+    7%   { clip-path: inset(60% 0 25% 0); transform: translate(-4px, -2px); }
+    14%  { clip-path: inset(35% 0 50% 0); transform: translate( 2px,  4px); }
+    21%  { clip-path: inset(10% 0 75% 0); transform: translate(-1px, -3px); }
+    28%  { clip-path: inset(78% 0  5% 0); transform: translate( 5px,  2px); }
+    35%  { clip-path: inset(50% 0 30% 0); transform: translate(-3px,  1px); }
+    42%  { clip-path: inset(20% 0 65% 0); transform: translate( 1px, -4px); }
+    49%  { clip-path: inset(90% 0  0% 0); transform: translate(-2px,  3px); }
+    56%  { clip-path: inset(40% 0 45% 0); transform: translate( 4px, -1px); }
+    63%  { clip-path: inset( 5% 0 85% 0); transform: translate(-5px,  2px); }
+    70%  { clip-path: inset(70% 0 12% 0); transform: translate( 2px, -2px); }
+    77%  { clip-path: inset(25% 0 60% 0); transform: translate(-1px,  4px); }
+    84%  { clip-path: inset(55% 0 28% 0); transform: translate( 3px, -3px); }
+    91%  { clip-path: inset(15% 0 72% 0); transform: translate(-4px,  1px); }
+    100% { clip-path: inset(82% 0  3% 0); transform: translate( 1px, -1px); }
+  }
+
+  @keyframes body-shake {
+    0%, 90%, 100% { transform: translate(0, 0); }
+    91%  { transform: translate(-2px, 1px); }
+    92%  { transform: translate( 2px,-1px); }
+    93%  { transform: translate(-1px, 2px); }
+    94%  { transform: translate( 1px,-2px); }
+  }
+
+  /* ── unicode pile-up ────────────────────────────────────────────── */
+  /* Each .pile span is a base character buried under combining marks */
+  .pile-row {
+    display: flex;
+    gap: 1.5rem;
+    margin: 3rem 0 1rem;
+    font-size: clamp(2rem, 6vw, 5rem);
+    line-height: 3;          /* room for the stacked marks */
+    letter-spacing: .5em;
+    filter: drop-shadow(0 0 8px var(--c1))
+            drop-shadow(0 0 16px var(--c2));
+    animation: pile-flicker 2.3s infinite alternate;
+  }
+
+  @keyframes pile-flicker {
+    0%  { opacity: 1;    filter: drop-shadow(0 0  8px var(--c1)) drop-shadow(0 0 16px var(--c2)); }
+    40% { opacity: .9;   filter: drop-shadow(2px 0 8px var(--c2)) drop-shadow(-2px 0 16px var(--c1)); }
+    80% { opacity: .95; }
+    100%{ opacity: 1;    filter: drop-shadow(0 0 12px #fff) drop-shadow(0 0 24px var(--c1)); }
+  }
+
+  /* ── status bar ─────────────────────────────────────────────────── */
+  .status {
+    font-size: .75rem;
+    color: #444;
+    margin-top: 4rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    animation: blink 1.2s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── noise bars (random horizontal tears) ──────────────────────── */
+  .tear {
+    position: fixed;
+    left: 0; right: 0;
+    height: 3px;
+    background: var(--c1);
+    opacity: 0;
+    animation: tear-anim 5s infinite;
+  }
+  .tear:nth-child(2) { background: var(--c2); animation-delay: 1.3s; animation-duration: 4.1s; }
+  .tear:nth-child(3) { background: #fff;       animation-delay: 2.7s; animation-duration: 6.3s; }
+
+  @keyframes tear-anim {
+    0%   { opacity: 0; top: 10%; }
+    48%  { opacity: 0; }
+    49%  { opacity: .8; top: 35%; }
+    50%  { opacity: 0; top: 60%; }
+    98%  { opacity: 0; }
+    99%  { opacity: .6; top: 80%; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- horizontal tear artifacts -->
+<div class="tear"></div>
+<div class="tear"></div>
+<div class="tear"></div>
+
+<!--
+  The font installed by install-fonts.sh (from asplo.de/u/IhpZrq.xz) is
+  referenced via local() in the @font-face rule above.
+  After running:  bash install-fonts.sh
+  check the family name with:  fc-list | grep silly-glitch
+  then update the first local() src in the @font-face rule.
+-->
+
+<h1 class="glitch" data-text="GLITCH">GLITCH</h1>
+
+<!-- Unicode combining-mark pile-up — same technique as README.md -->
+<!-- Base chars: و (U+0648 ARABIC WAW) stacked with U+0488 (COMBINING CYRILLIC MILLIONS SIGN) -->
+<div class="pile-row" aria-label="glitch pile-up">
+  <!-- Each span: one base char + 40 combining marks (U+0488) -->
+  <span>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</span>
+  <span>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</span>
+  <span>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</span>
+  <span>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</span>
+  <span>و҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈҈</span>
+</div>
+
+<p class="status">█ font: asplo.de/u/IhpZrq.xz &nbsp;|&nbsp; run install-fonts.sh to activate █</p>
+
+</body>
+</html>
